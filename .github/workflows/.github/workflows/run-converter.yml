@@ -1,0 +1,27 @@
+name: Run Unity3D Converter
+
+on:
+  workflow_dispatch:  # ໃຫ້ເຮົາສາມາດກົດປຸ່ມ Run ດ້ວຍມືເທິງ GitHub ໄດ້
+
+jobs:
+  run-on-windows:
+    runs-on: windows-latest  # ໃຊ້ Windows Server ຂອງ GitHub ເພື່ອແກ້ໄຂບັນຫາ Pyarmor .pyd
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run Converter Task
+      run: |
+        # ທ່ານສາມາດປ່ຽນຄຳສັ່ງ CLI ຢູ່ບ່ອນນີ້ຕາມຕ້ອງການ
+        python -m u3dconv.cli --help
